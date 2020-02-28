@@ -11,6 +11,7 @@ class Enigma
 
   def encrypt(message, key, date)
     get_info(key, date)
+    shift_alphabet
 
     encryption_info = {}
     encryption_info[:encryption] = new_message(message.downcase)
@@ -29,6 +30,19 @@ class Enigma
     offset3 = @alphabet.rotate(@offset_values[2]).join
     offset4 = @alphabet.rotate(@offset_values[3]).join
     @offset = [offset1, offset2, offset3, offset4]
+  end
+
+  def new_message(message)
+    new_message = ""
+    message.each_char do |character|
+      if @alphabet.include?(character)
+        new_message << character.tr(@alphabet.join, @offset.first)
+        @offset.rotate!
+      else
+        new_message << character
+      end
+    end
+    new_message
   end
 
 end

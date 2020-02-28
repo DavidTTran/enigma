@@ -1,4 +1,5 @@
 require './lib/enigma'
+require_relative 'test_helper'
 
 class EnigmaTest < Minitest::Test
 
@@ -11,6 +12,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_encrypt
+    skip
     expected =
     {
       encryption: "keder ohulw",
@@ -24,6 +26,6 @@ class EnigmaTest < Minitest::Test
   def test_it_can_get_keys
     key = "02715"
 
-    assert_equal [2,27,71,15], @cipher.get_keys(key)
+    assert_equal [2,27,71,15], @enigma.key_to_pairs(key)
   end
 end

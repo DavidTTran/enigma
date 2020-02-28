@@ -74,14 +74,14 @@ class Enigma
     new_message
   end
 
-  def decrypt(encrypted_message, key, date)
+  def decrypt(encrypted_message, key, date = nil)
     get_info(key, date)
     shift_alphabet("decrypt")
 
     decryption_info = {}
     decryption_info[:decryption] = new_message(encrypted_message.downcase)
     decryption_info[:key] = key
-    decryption_info[:date] = date
+    decryption_info[:date] = date.nil? ? @date : date
     decryption_info
   end
 

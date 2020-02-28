@@ -73,4 +73,15 @@ class EnigmaTest < Minitest::Test
     message = "abc"
     assert_equal "bcd", @enigma.new_message(message)
   end
+
+  def test_it_can_decrypt_a_message
+    expected =
+    {
+      decryption: "hello world",
+      key: "02715",
+      date: "040895"
+    }
+
+    assert_equal expected, @enigma.decrypt("keder ohulw", "02715", "040895")
+  end
 end

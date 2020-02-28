@@ -32,13 +32,13 @@ class EnigmaTest < Minitest::Test
   def test_it_can_get_date_key
     date = "040895"
 
-    assert_equal [1,0,2,5], @enigma.get_date_keys(date)
+    assert_equal [1,0,2,5], @enigma.date_to_key(date)
   end
 
   def test_it_can_get_offset_total
     date = "040895"
     key = "02715"
 
-    assert_equal [3,27,73,20], @enigma.get_total_offset(key, date)
+    assert_equal [3,27,73,20], @enigma.get_info(key, date)
   end
 end

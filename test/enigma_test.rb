@@ -33,7 +33,7 @@ class EnigmaTest < Minitest::Test
   def test_it_can_get_keys
     key = "02715"
 
-    assert_equal [2,27,71,15], @enigma.key_to_pairs(key)
+    assert_equal [2,27,71,15], @enigma.get_keys(key)
   end
 
   def test_key_to_pairs
@@ -53,7 +53,7 @@ class EnigmaTest < Minitest::Test
   def test_it_can_get_date_key
     date = "040895"
 
-    assert_equal [1,0,2,5], @enigma.date_to_keys(date)
+    assert_equal [1,0,2,5], @enigma.get_date_keys(date)
   end
 
   def test_it_can_get_offset_total

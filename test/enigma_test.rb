@@ -55,4 +55,9 @@ class EnigmaTest < Minitest::Test
 
     assert_equal [3,27,73,20], @enigma.get_info(key, date)
   end
+
+  def test_shift_alphabet
+    skip
+    assert_equal 1, @cipher.shift_alphabet
+  end
 end

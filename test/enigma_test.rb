@@ -20,4 +20,10 @@ class EnigmaTest < Minitest::Test
 
     assert_equal expected, @enigma.encrypt("hello world", "02715", "040895")
   end
+
+  def test_it_can_get_keys
+    key = "02715"
+
+    assert_equal [2,27,71,15], @cipher.get_keys(key)
+  end
 end

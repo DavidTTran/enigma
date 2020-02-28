@@ -58,6 +58,12 @@ class EnigmaTest < Minitest::Test
 
   def test_shift_alphabet
     skip
-    assert_equal 1, @cipher.shift_alphabet
+    assert_equal 1, @enigma.shift_alphabet
+  end
+
+  def test_it_can_encrypt_a_message
+    skip
+    message = "abc"
+    assert_equal "bcd", @enigma.new_message(message)
   end
 end

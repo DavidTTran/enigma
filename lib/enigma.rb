@@ -9,21 +9,40 @@ class Enigma
     @alphabet = ("a".."z").to_a << " "
     @offset = nil
     @offset_values = nil
+    @date = nil
   end
 
-  def encrypt(message, key, date)
+  def encrypt(message, key, date = nil)
     get_info(key, date)
     shift_alphabet
 
     encryption_info = {}
     encryption_info[:encryption] = new_message(message.downcase)
     encryption_info[:key] = key
-    encryption_info[:date] = date
+    encryption_info[:date] = date.nil? ? @date : date
     encryption_info
   end
 
-  def get_info(key, date)
-    @offset_values = total_offset(key_to_pairs(key), date_to_keys(date))
+  def get_info(key = nil, date = nil)
+    if date.nil? && key.nil?
+      get_total_offset(get_random_key, get_date)
+    elsif date.nil?
+      get_total_offset(key, get_date)
+    else
+      get_total_offset(key, date)
+    end
+  end
+
+  def get_total_offset(key, date)
+    @offset_values = total_offset(get_keys(key), get_date_keys(date))
+  end
+
+  def get_keys(key)
+    key_to_pairs(key)
+  end
+
+  def get_date_keys(date)
+    date_to_keys(date)
   end
 
   def shift_alphabet(function = "encrypt")

@@ -90,4 +90,16 @@ class EnigmaTest < Minitest::Test
 
     assert_equal expected, @enigma.get_date
   end
+
+  def test_it_can_encrypt_with_todays_date
+    Date.expects(:today).returns(Date.new(2020,02,28))
+    encrypted =
+    {
+      encryption: "rib ydmcapu",
+      key: "02715",
+      date: "280220"
+    }
+
+    assert_equal encrypted, @enigma.encrypt("hello world", "02715")
+  end
 end

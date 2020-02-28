@@ -6,7 +6,7 @@ module Transformable
     keys.map { |key| key.join.to_i }
   end
 
-  def date_to_key(date)
+  def date_to_keys(date)
     last_four = ((((date.to_i)**2).to_s)[-4..-1])
     if last_four.nil?
       [0,0,0,0]

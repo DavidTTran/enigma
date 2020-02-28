@@ -29,10 +29,24 @@ class EnigmaTest < Minitest::Test
     assert_equal [2,27,71,15], @enigma.key_to_pairs(key)
   end
 
+  def test_key_to_pairs
+    assert_equal [10,4,45,55], @enigma.key_to_pairs("10455")
+  end
+
+  def test_date_squared_last_four_num
+    assert_equal [4,4,0,0], @enigma.date_to_keys("120620")
+  end
+
+  def test_total_offset
+    key = [1,1,1,1]
+    date = [1,1,1,1]
+    assert_equal [2,2,2,2], @enigma.total_offset(key, date)
+  end
+
   def test_it_can_get_date_key
     date = "040895"
 
-    assert_equal [1,0,2,5], @enigma.date_to_key(date)
+    assert_equal [1,0,2,5], @enigma.date_to_keys(date)
   end
 
   def test_it_can_get_offset_total

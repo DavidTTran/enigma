@@ -9,6 +9,7 @@ class Enigma
 
   def encrypt(message, key, date)
     get_info(key, date)
+
     encryption_info = {}
     encryption_info[:encryption] = new_message(message.downcase)
     encryption_info[:key] = key
@@ -17,6 +18,7 @@ class Enigma
   end
 
   def get_info(key, date)
-    @offset_values = total_offset(key_to_pairs(key), date_to_key(date))
+    @offset_values = total_offset(key_to_pairs(key), date_to_keys(date))
   end
+
 end

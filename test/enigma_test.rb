@@ -135,10 +135,10 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_generate_random_number
-    assert_instance_of String, @cipher.get_random_key
-    assert @cipher.get_random_key.to_i < 100000
-    assert_equal 5, @cipher.get_random_key.length
+    assert_instance_of String, @enigma.get_random_key
+    assert @enigma.get_random_key.to_i < 100000
+    assert_equal 5, @enigma.get_random_key.length
     # little odd testing minimum value, as it can return "00000"
-    # assert @cipher.random_key.to_i > 999
+    # assert @enigma.random_key.to_i > 999
   end
 end

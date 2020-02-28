@@ -1,7 +1,9 @@
 require_relative 'modules/transformable'
+require_relative 'modules/gettable'
 
 class Enigma
   include Transformable
+  include Gettable
 
   def initialize
     @alphabet = ("a".."z").to_a << " "

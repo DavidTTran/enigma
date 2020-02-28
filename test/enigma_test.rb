@@ -120,4 +120,17 @@ class EnigmaTest < Minitest::Test
     }
     assert_equal expected, @enigma.decrypt(encrypted[:encryption], "02715")
   end
+
+  def test_it_can_encrypt_with_random_number
+    Array.expects(:new).returns([1,2,3,4,5])
+    Date.expects(:today).returns(Date.new(2020,02,28))
+    expected =
+    {
+      encryption: "aesch cfklk",
+      key: "12345",
+      date: "280220"
+    }
+
+    assert_equal expected, @enigma.encrypt("hello world")
+  end
 end

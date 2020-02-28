@@ -10,15 +10,16 @@ class Enigma
     @offset = nil
     @offset_values = nil
     @date = nil
+    @random_key = nil
   end
 
-  def encrypt(message, key, date = nil)
+  def encrypt(message, key = nil, date = nil)
     get_info(key, date)
-    shift_alphabet
+    shift_alphabet("encrypt")
 
     encryption_info = {}
     encryption_info[:encryption] = new_message(message.downcase)
-    encryption_info[:key] = key
+    encryption_info[:key] = key.nil? ? @random_key : key
     encryption_info[:date] = date.nil? ? @date : date
     encryption_info
   end
@@ -74,7 +75,7 @@ class Enigma
     new_message
   end
 
-  def decrypt(encrypted_message, key, date = nil)
+  def decrypt(encrypted_message, key = nil, date = nil)
     get_info(key, date)
     shift_alphabet("decrypt")
 

@@ -8,7 +8,11 @@ module Transformable
 
   def date_to_key(date)
     last_four = ((((date.to_i)**2).to_s)[-4..-1])
-    last_four.split("").map { |key| key.to_i }
+    if last_four.nil?
+      [0,0,0,0]
+    else
+      last_four.split("").map { |key| key.to_i }
+    end
   end
 
   def total_offset(key, date)

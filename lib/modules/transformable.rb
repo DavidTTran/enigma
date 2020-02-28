@@ -16,7 +16,7 @@ module Transformable
   end
 
   def total_offset(key, date)
-   [key, date].transpose.map { |new_value| new_value.reduce(:+) }
+   @offset_values = [key, date].transpose.map { |new_value| new_value.reduce(:+) }
   end
 
 end

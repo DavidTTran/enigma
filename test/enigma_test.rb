@@ -33,7 +33,7 @@ class EnigmaTest < Minitest::Test
   def test_it_can_get_keys
     key = "02715"
 
-    assert_equal [2,27,71,15], @enigma.key_to_pairs(key)
+    assert_equal [2,27,71,15], @enigma.get_keys(key)
   end
 
   def test_key_to_pairs
@@ -53,7 +53,7 @@ class EnigmaTest < Minitest::Test
   def test_it_can_get_date_key
     date = "040895"
 
-    assert_equal [1,0,2,5], @enigma.date_to_keys(date)
+    assert_equal [1,0,2,5], @enigma.get_date_keys(date)
   end
 
   def test_it_can_get_offset_total
@@ -72,5 +72,73 @@ class EnigmaTest < Minitest::Test
     skip
     message = "abc"
     assert_equal "bcd", @enigma.new_message(message)
+  end
+
+  def test_it_can_decrypt_a_message
+    expected =
+    {
+      decryption: "hello world",
+      key: "02715",
+      date: "040895"
+    }
+
+    assert_equal expected, @enigma.decrypt("keder ohulw", "02715", "040895")
+  end
+
+  def test_it_can_get_todays_date
+    expected = Date.today.strftime("%d%m%y")
+
+    assert_equal expected, @enigma.get_date
+  end
+
+  def test_it_can_encrypt_with_todays_date
+    Date.expects(:today).returns(Date.new(2020,02,28))
+    encrypted =
+    {
+      encryption: "rib ydmcapu",
+      key: "02715",
+      date: "280220"
+    }
+
+    assert_equal encrypted, @enigma.encrypt("hello world", "02715")
+  end
+
+  def test_it_can_decrypt_with_todays_date
+    Date.expects(:today).returns(Date.new(2020,02,28))
+    encrypted =
+    {
+      encryption: "rib ydmcapu",
+      key: "02715",
+      date: "280220"
+    }
+
+    expected =
+    {
+      decryption: "hello world",
+      key: "02715",
+      date: "280220"
+    }
+    assert_equal expected, @enigma.decrypt(encrypted[:encryption], "02715")
+  end
+
+  def test_it_can_encrypt_with_random_number
+    Array.expects(:new).returns([1,2,3,4,5])
+    Date.expects(:today).returns(Date.new(2020,02,28))
+    expected =
+    {
+      encryption: "aesch cfklk",
+      key: "12345",
+      date: "280220"
+    }
+
+    assert_equal expected, @enigma.encrypt("hello world")
+  end
+
+  def test_it_can_generate_random_number
+    assert_instance_of String, @enigma.get_random_key
+    assert @enigma.get_random_key.to_i < 100000
+    assert_equal 5, @enigma.get_random_key.length
+    # little odd testing minimum value, as it can return "00000"
+    # assert @enigma.random_key.to_i > 999
   end
 end

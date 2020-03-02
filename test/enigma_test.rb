@@ -12,12 +12,13 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_encrypt_a_message
-    skip
     date = "010101"
     key = "00000"
     message = "abc"
     @enigma.get_info(key, date)
-    assert_equal "bcd", @enigma.new_message(message)
+    @enigma.shift_alphabet
+
+    assert_equal "adc", @enigma.new_message(message)
   end
 
   def test_it_can_encrypt
@@ -100,18 +101,6 @@ class EnigmaTest < Minitest::Test
     }
 
     assert_equal expected, @enigma.encrypt("hello world")
-  end
-
-  def test_it_can_crack_a_message
-    Date.expects(:today).returns(Date.new(2020,02,02))
-    expected =
-    {
-      :encryption=>"xkopdfzsgrgdutg",
-      :key=>"08304",
-      :date=>"020220"
-    }
-
-    assert_equal expected, @enigma.crack("xkopdfzsgrgdutg", "020220")
   end
 
 end

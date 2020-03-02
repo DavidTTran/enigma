@@ -3,10 +3,13 @@ require_relative 'cipher'
 class Enigma < Cipher
 
   def initialize
+    @date = nil
+    @random_key = nil
     super
   end
 
   def encrypt(message, key = nil, date = nil)
+    keys_valid?(key, date)
     get_info(key, date)
     shift_alphabet("encrypt")
 
@@ -15,6 +18,18 @@ class Enigma < Cipher
     encryption_info[:key] = key.nil? ? @random_key : key
     encryption_info[:date] = date.nil? ? @date : date
     encryption_info
+  end
+
+  def decrypt(encrypted_message, key = nil, date = nil)
+    keys_valid?(key, date)
+    get_info(key, date)
+    shift_alphabet("decrypt")
+
+    decryption_info = {}
+    decryption_info[:decryption] = new_message(encrypted_message.downcase)
+    decryption_info[:key] = key
+    decryption_info[:date] = date.nil? ? @date : date
+    decryption_info
   end
 
   def get_info(key = nil, date = nil)
@@ -38,17 +53,6 @@ class Enigma < Cipher
       end
     end
     new_message
-  end
-
-  def decrypt(encrypted_message, key = nil, date = nil)
-    get_info(key, date)
-    shift_alphabet("decrypt")
-
-    decryption_info = {}
-    decryption_info[:decryption] = new_message(encrypted_message.downcase)
-    decryption_info[:key] = key
-    decryption_info[:date] = date.nil? ? @date : date
-    decryption_info
   end
 
 end

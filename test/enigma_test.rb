@@ -12,12 +12,13 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_encrypt_a_message
-    skip
     date = "010101"
     key = "00000"
     message = "abc"
     @enigma.get_info(key, date)
-    assert_equal "bcd", @enigma.new_message(message)
+    @enigma.shift_alphabet
+
+    assert_equal "adc", @enigma.new_message(message)
   end
 
   def test_it_can_encrypt

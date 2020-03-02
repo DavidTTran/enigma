@@ -11,6 +11,15 @@ class EnigmaTest < Minitest::Test
     assert_instance_of Enigma, @enigma
   end
 
+  def test_it_can_encrypt_a_message
+    skip
+    date = "010101"
+    key = "00000"
+    message = "abc"
+    @enigma.get_info(key, date)
+    assert_equal "bcd", @enigma.new_message(message)
+  end
+
   def test_it_can_encrypt
     expected1 =
     {
@@ -26,8 +35,16 @@ class EnigmaTest < Minitest::Test
       date: "000000"
     }
 
+    expected3 =
+    {
+      encryption: "kbc",
+      key: "10000",
+      date: "000000"
+    }
+
     assert_equal expected1, @enigma.encrypt("hello world", "02715", "040895")
     assert_equal expected2, @enigma.encrypt("HELLO! WORLD!", "00000", "000000")
+    assert_equal expected3, @enigma.encrypt("abc", "10000", "000000")
   end
 
   def test_it_can_decrypt_a_message

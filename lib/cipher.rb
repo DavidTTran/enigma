@@ -5,12 +5,12 @@ class Cipher
   include Transformable
   include Gettable
 
+  attr_reader :offset_values, :offset, :alphabet
+
   def initialize
     @alphabet = ("a".."z").to_a << " "
     @offset = nil
     @offset_values = nil
-    @date = nil
-    @random_key = nil
   end
 
   def get_total_offset(key, date)

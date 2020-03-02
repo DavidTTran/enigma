@@ -27,7 +27,6 @@ class Enigma < Cipher
     end
   end
 
-
   def new_message(message)
     new_message = ""
     message.each_char do |character|

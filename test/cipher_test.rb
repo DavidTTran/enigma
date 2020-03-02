@@ -38,21 +38,22 @@ class CipherTest < Minitest::Test
   end
 
   def test_it_can_get_offset_total
-    date = [1,0,2,5]
-    key = [2,27,71,15]
+    date = [1,1,1,1]
+    key = [0,0,0,0]
 
-    assert_equal [3,27,73,20], @cipher.total_offset(key, date)
+    assert_equal [1,1,1,1], @cipher.total_offset(key, date)
   end
 
   def test_shift_alphabet
-    skip
-    assert_equal 1, @cipher.shift_alphabet
-  end
+    date = "040895"
+    key = "02715"
+    @cipher.get_total_offset(key, date)
+    expected = ["defghijklmnopqrstuvwxyz abc",
+                "abcdefghijklmnopqrstuvwxyz ",
+                "tuvwxyz abcdefghijklmnopqrs",
+                "uvwxyz abcdefghijklmnopqrst"]
 
-  def test_it_can_encrypt_a_message
-    skip
-    message = "abc"
-    assert_equal "bcd", @cipher.new_message(message)
+    assert_equal expected, @cipher.shift_alphabet
   end
 
   def test_it_can_get_todays_date
@@ -65,7 +66,5 @@ class CipherTest < Minitest::Test
     assert_instance_of String, @cipher.get_random_key
     assert @cipher.get_random_key.to_i < 100000
     assert_equal 5, @cipher.get_random_key.length
-    # little odd testing minimum value, as it can return "00000"
-    # assert @cipher.random_key.to_i > 999
   end
 end

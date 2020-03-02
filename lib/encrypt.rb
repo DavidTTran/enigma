@@ -1,14 +1,10 @@
-require_relative 'cipher'
 require_relative 'enigma'
 enigma = Enigma.new
-cipher = Cipher.new
 
 ARGV == ["message.txt", "encrypted.txt"]
-ARGV[0] == "message.txt"
-ARGV[1] == "encrypted.txt"
 
 message = ""
-file = File.foreach(ARGV[0], "r") do |row|
+File.foreach(ARGV[0], "r") do |row|
   message << row
 end
 

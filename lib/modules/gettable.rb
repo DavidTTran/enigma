@@ -1,5 +1,6 @@
-module Gettable
 require 'date'
+
+module Gettable
 
   def get_date
     @date = Date.today.strftime("%d%m%y")

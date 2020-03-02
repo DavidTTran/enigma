@@ -1,16 +1,10 @@
-require_relative 'cipher'
 require_relative 'enigma'
 enigma = Enigma.new
-cipher = Cipher.new
 
 ARGV == ["message.txt", "encrypted.txt", "key", "date"]
-ARGV[0] == "encrypted.txt"
-ARGV[1] == "decrypted.txt"
-ARGV[2] == "key"
-ARGV[3] == "date"
 
 message = ""
-file = File.foreach(ARGV[0], "r") do |row|
+File.foreach(ARGV[0], "r") do |row|
   message << row
 end
 new_message = enigma.decrypt(message, ARGV[2], ARGV[3])

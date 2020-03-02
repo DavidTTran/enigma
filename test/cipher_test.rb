@@ -11,12 +11,6 @@ class CipherTest < Minitest::Test
     assert_instance_of Cipher, @cipher
   end
 
-  def test_it_can_get_keys
-    key = "02715"
-
-    assert_equal [2,27,71,15], @cipher.get_keys(key)
-  end
-
   def test_key_to_pairs
     assert_equal [10,4,45,55], @cipher.key_to_pairs("10455")
   end
@@ -40,12 +34,10 @@ class CipherTest < Minitest::Test
     key = "12345"
     date = "1234567"
     assert_equal "Invalid date", @cipher.keys_valid?(key, date)
-  end
 
-  def test_it_can_get_date_key
-    date = "040895"
-
-    assert_equal [1,0,2,5], @cipher.get_date_keys(date)
+    key = "123ab"
+    date = "020320"
+    assert_equal "Invalid key", @cipher.keys_valid?(key, date)
   end
 
   def test_it_can_get_offset_total

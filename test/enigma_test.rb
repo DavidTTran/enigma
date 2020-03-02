@@ -102,4 +102,16 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.encrypt("hello world")
   end
 
+  def test_it_can_crack_a_message
+    Date.expects(:today).returns(Date.new(2020,02,02))
+    expected =
+    {
+      :encryption=>"xkopdfzsgrgdutg",
+      :key=>"08304",
+      :date=>"020220"
+    }
+
+    assert_equal expected, @enigma.crack("xkopdfzsgrgdutg", "020220")
+  end
+
 end

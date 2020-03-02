@@ -31,6 +31,17 @@ class CipherTest < Minitest::Test
     assert_equal [2,2,2,2], @cipher.total_offset(key, date)
   end
 
+  def test_it_can_validate_keys
+    key = "123456"
+    date = "020320"
+
+    assert_equal "Invalid key", @cipher.keys_valid?(key, date)
+
+    key = "12345"
+    date = "1234567"
+    assert_equal "Invalid date", @cipher.keys_valid?(key, date)
+  end
+
   def test_it_can_get_date_key
     date = "040895"
 

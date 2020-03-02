@@ -1,9 +1,11 @@
 require_relative 'modules/transformable'
 require_relative 'modules/gettable'
+require_relative 'modules/validateable'
 
 class Cipher
   include Transformable
   include Gettable
+  include Validateable
 
   attr_reader :offset_values, :offset, :alphabet
 

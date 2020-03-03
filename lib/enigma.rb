@@ -45,12 +45,8 @@ class Enigma < Cipher
   def new_message(message)
     new_message = ""
     message.each_char do |character|
-      if @alphabet.include?(character)
-        new_message << character.tr(@alphabet.join, @offset.first)
-        @offset.rotate!
-      else
-        new_message << character
-      end
+      new_message << character.tr(@alphabet.join, @offset.first)
+      @offset.rotate!
     end
     new_message
   end
